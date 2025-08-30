@@ -2,10 +2,10 @@
 
 [Hoja de ruta](./docs/Hoja%20de%20Ruta%20Proyecto.pdf)
 
-## Running unit tests
+## Herramientas de revision
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+https://validator.w3.org/
 
-## Running end-to-end tests
+## Herramientas de administracion
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+https://pm2.keymetrics.io/
