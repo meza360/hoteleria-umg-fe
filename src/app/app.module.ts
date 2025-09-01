@@ -3,17 +3,36 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RoomsComponent } from './pages/customer/information/rooms/rooms.component';
+import { OurServicesComponent } from './pages/customer/information/our-services/our-services.component';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideServerRendering } from '@angular/platform-server';
+import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ApiHeadersInterceptor } from './core/interceptors/api-headers.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ManagementModule } from './pages/management/management.module';
+import { CustomerModule } from './pages/customer/customer.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RoomsComponent,
+    OurServicesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ManagementModule,
+    CustomerModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideServerRendering(),
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiHeadersInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
