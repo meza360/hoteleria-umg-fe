@@ -12,15 +12,16 @@ import { ApiHeadersInterceptor } from './core/interceptors/api-headers.intercept
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ManagementModule } from './pages/management/management.module';
 import { CustomerModule } from './pages/customer/customer.module';
+import { SharedModule } from './shared.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RoomsComponent,
-    OurServicesComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,
+    SharedModule,
+    MaterialModule,
     AppRoutingModule,
     ManagementModule,
     CustomerModule
@@ -29,8 +30,6 @@ import { CustomerModule } from './pages/customer/customer.module';
     provideClientHydration(),
     provideHttpClient(withInterceptorsFromDi()),
     provideServerRendering(),
-    { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: ApiHeadersInterceptor, multi: true },
     provideAnimationsAsync()
   ],
