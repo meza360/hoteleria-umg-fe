@@ -7,6 +7,11 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundComponent
+  },
+  {
+    path: '',
+    redirectTo: '/customer/information/home',
+    pathMatch: 'full'
   }
 ];
 

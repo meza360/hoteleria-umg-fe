@@ -14,10 +14,14 @@ import { ManagementModule } from './pages/management/management.module';
 import { CustomerModule } from './pages/customer/customer.module';
 import { SharedModule } from './shared.module';
 import { MaterialModule } from './material.module';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     SharedModule,
