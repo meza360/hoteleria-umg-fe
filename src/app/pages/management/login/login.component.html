@@ -1,0 +1,38 @@
+<div class="container-md text-center">
+  <div class="col align-center full-width text-center py-3 px-3 my-2">
+    <form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()" class="login-form ">
+      <section class="col full-width text-center">
+        <mat-form-field>
+          <mat-label for="username" class="form-label">Usuario del sistema</mat-label>
+          <input matInput type="text" class="form-control" id="username" formControlName="username"
+                 placeholder="Ingresa tu usuario" maxlength="20">
+          @if(userLoginForm.get('username')?.touched && userLoginForm.get('username')?.errors?.['required']){
+          <mat-error>Usuario es requerido.</mat-error>
+          }
+          @if(userLoginForm.get('username')?.errors?.['minlength']){
+          <mat-error>El usuario debe contener minimo 6 caracteres</mat-error>
+          }
+        </mat-form-field>
+      </section>
+      <section class="col full-width">
+        <mat-form-field>
+          <mat-label for="password" class="form-label">Contraseña</mat-label>
+          <input matInput type="password" class="form-control" id="password" formControlName="password"
+                 placeholder="Clave de acceso" maxlength="20">
+          @if(userLoginForm.get('password')?.touched && userLoginForm.get('password')?.errors?.['required']){
+          <mat-error>Contrasena es requerida</mat-error>
+          }
+          @if(userLoginForm.get('password')?.errors?.['minlength']){
+          <mat-error>La contrasena debe contener minimo 6 caracteres</mat-error>
+          }
+        </mat-form-field>
+      </section>
+      <section class="col text-center">
+        <button mat-button type="submit" class="full-width" [disabled]="userLoginForm.invalid"
+                [matTooltip]="userLoginForm.invalid ? 'Completa los campos para habilitar el inicio' : ''">
+          Ingresar al sistema
+        </button>
+      </section>
+    </form>
+  </div>
+</div>
