@@ -5,11 +5,15 @@ import { HomeComponent } from './home/home.component';
 const customerRoutes: Routes = [
 
   {
-    path: 'customer/information/home',
+    path: 'customer/home',
     component: HomeComponent
   },
   {
     path: 'customer/information/rooms',
+    component: RoomsComponent
+  },
+  {
+    path: 'customer/information/our-services',
     component: RoomsComponent
   },
   {

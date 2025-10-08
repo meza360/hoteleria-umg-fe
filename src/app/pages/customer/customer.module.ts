@@ -3,6 +3,7 @@ import { SharedModule } from '../../shared.module';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { RoomsComponent } from './information/rooms/rooms.component';
 import { HomeComponent } from './home/home.component';
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     SharedModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    MatButtonModule
   ]
 })
 export class CustomerModule { }

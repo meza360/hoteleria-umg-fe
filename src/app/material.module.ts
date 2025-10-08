@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
   ],
   exports: [
     MatSidenavModule,
@@ -51,7 +53,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
   ]
 })
 
