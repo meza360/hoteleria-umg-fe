@@ -1,13 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomsComponent } from './pages/customer/information/rooms/rooms.component';
-import { OurServicesComponent } from './pages/customer/information/our-services/our-services.component';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideServerRendering } from '@angular/platform-server';
-import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ApiHeadersInterceptor } from './core/interceptors/api-headers.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ManagementModule } from './pages/management/management.module';

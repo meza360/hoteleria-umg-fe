@@ -4,14 +4,15 @@ import { NotFoundComponent } from './pages/shared/not-found/not-found.component'
 import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
-  {
-    path: 'not-found',
-    component: NotFoundComponent
-  },
+
   {
     path: '',
     redirectTo: '/customer/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
   }
 ];
 

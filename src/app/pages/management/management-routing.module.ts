@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 
 const managementRouter: Routes = [
   {
-    path: '**',
-    redirectTo: 'not-found'
+    path: 'management/login',
+    component: LoginComponent
   }
 ];
 

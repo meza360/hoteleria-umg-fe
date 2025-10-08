@@ -16,10 +16,7 @@ const customerRoutes: Routes = [
     path: 'customer/information/our-services',
     component: RoomsComponent
   },
-  {
-    path: '**',
-    redirectTo: 'not-found'
-  }
+
 ];
 
 
