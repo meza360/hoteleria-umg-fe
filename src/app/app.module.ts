@@ -12,12 +12,14 @@ import { SharedModule } from './shared.module';
 import { MaterialModule } from './material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LoadingDialogComponent } from './components/loading-dialog/loading-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingDialogComponent
   ],
   imports: [
     SharedModule,

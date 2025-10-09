@@ -1,5 +1,7 @@
+import { AuthUser } from './AuthUser';
+
 export interface ApiResponse {
   isSuccess: boolean;
-  value: any;
-  error: string | null;
+  value: any | AuthUser;
+  error?: string | null;
 }

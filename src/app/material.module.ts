@@ -19,6 +19,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 @NgModule({
   imports: [
@@ -41,7 +44,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatChipsModule,
     MatButtonModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatProgressBarModule
   ],
   exports: [
     MatSidenavModule,
@@ -63,7 +68,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatChipsModule,
     MatButtonModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatProgressBarModule
   ], providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }]
 })
