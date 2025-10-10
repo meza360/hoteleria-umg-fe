@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/prod.env';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Reservation } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,15 @@ export class RoomsService {
       });
     }
     return this.httpClient.get<Array<any>>(this.apiUrl);
+  }
+
+  getReservations(): Observable<Array<Reservation>> {
+    if (!this.production) {
+      return new Observable((observer) => {
+        observer.next(environment.reservations as Array<Reservation>);
+        observer.complete();
+      });
+    }
+    return this.httpClient.get<Array<Reservation>>(`${this.apiUrl}/reservations`);
   }
 }
