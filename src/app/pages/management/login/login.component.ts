@@ -63,7 +63,7 @@ export class LoginComponent {
     this.AuthService.login(username || '', password || '')
       .subscribe(
         {
-          next: (response: AuthUser): void => {
+          next: (response: AuthUser | null): void => {
             this.logger.logInfo('Login exitoso', response);
           },
           error: (error: HttpErrorResponse): void => {

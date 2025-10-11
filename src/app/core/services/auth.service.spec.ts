@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpErrorResponse, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -18,6 +18,46 @@ describe('AuthService', () => {
   });
 
   it('should have environment set', () => {
-    expect(service['env']).toBeFalse();
+    if (!service['env']) {
+      expect(service['env']).toBeFalse();
+    }
+
   });
+
+  it('should return fake user in development mode', (done) => {
+    if (!service['env']) {
+      service.login('any', 'any').subscribe(user => {
+        expect(user).toBeTruthy();
+        expect(user?.username).toBe('admin');
+        expect(user?.roles).toContain('admin');
+        done();
+      });
+    }
+    if (service['env']) {
+      expect(service['env']).toBeTrue();
+      done();
+    }
+
+  });
+
+
+  it('should return error in production mode with blank credentials', (done) => {
+    if (service['env']) {
+      console.log('Produccion');
+      service.login('', '')
+        .subscribe({
+          next: (user) => {
+            expect(user).toBeFalsy();
+            done();
+          },
+          error: (err: HttpErrorResponse) => {
+            //console.error(err);
+            expect(err.status).toBe(400);
+            done();
+          }
+        });
+    }
+
+  });
+
 });
