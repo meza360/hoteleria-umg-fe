@@ -8,9 +8,7 @@ describe('RoomsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        provideHttpClient(withInterceptorsFromDi())
-      ]
+      providers: [provideHttpClient(withInterceptorsFromDi())]
     });
     service = TestBed.inject(RoomsService);
   });

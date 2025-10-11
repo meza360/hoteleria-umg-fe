@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse } from '../models/ApiResponse';
 import { AuthUser } from '../models/AuthUser';
@@ -15,7 +15,7 @@ export class AuthService {
     private logger: LoggingService
   ) { }
 
-  login(username: string, password: string): Observable<AuthUser> {
+  login(username: string, password: string): Observable<AuthUser | null> {
     if (!environment.production) {
       this.logger.logDebug('Modo desarrollo: Usando credenciales falsas');
       return new Observable<AuthUser>((observer) => {
@@ -27,6 +27,12 @@ export class AuthService {
             roles: ['admin', 'user']
           }
         );
+        observer.complete();
+      });
+    }
+    if (environment.production && (!username || !password)) {
+      return new Observable<AuthUser | null>((observer) => {
+        observer.next(null);
         observer.complete();
       });
     }

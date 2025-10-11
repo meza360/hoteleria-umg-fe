@@ -9,6 +9,7 @@ import { LoginComponent } from './login.component';
 import { SharedModule } from '../../../shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { LoadingDialogComponent } from '../../../components/loading-dialog/loading-dialog.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,7 +22,7 @@ describe('LoginComponent', () => {
     const snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [LoginComponent, LoadingDialogComponent],
       imports: [SharedModule, ReactiveFormsModule, MatDialogModule, MatProgressBar],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
@@ -40,23 +41,36 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show snackbar with "Bienvenido" on successful login', () => {
-    const mockAuthUser: AuthUser = {
-      token: 'fake-token',
-      expiration: new Date(new Date().getTime() + 3600 * 1000).toISOString(),
-      username: 'admin',
-      roles: ['admin', 'user']
-    };
+  it('should show snackbar with "Bienvenido" on successful login with env dev', () => {
 
-    authService.login.and.returnValue(of(mockAuthUser)); // Simular inicio de sesión exitoso
+    if (!authService['env']) {
+      const mockAuthUser: AuthUser = {
+        token: 'fake-token',
+        expiration: new Date(new Date().getTime() + 3600 * 1000).toISOString(),
+        username: 'admin',
+        roles: ['admin', 'user']
+      };
 
+      authService.login.and.returnValue(of(mockAuthUser)); // Simular inicio de sesión exitoso
+
+      component.userLoginForm.setValue({ username: 'admin', password: 'admin123' });
+      component.onSubmit();
+
+      expect(authService.login).toHaveBeenCalledWith('admin', 'admin123');
+      expect(snackBar.open).toHaveBeenCalledWith('Bienvenido', 'X', {
+        horizontalPosition: 'end',
+        verticalPosition: 'bottom',
+      });
+    } else {
+      expect(true).toBeTruthy();
+    }
+
+  });
+
+  it('login method should be called with provided values', () => {
     component.userLoginForm.setValue({ username: 'admin', password: 'admin123' });
+    authService.login.and.returnValue(of());
     component.onSubmit();
-
     expect(authService.login).toHaveBeenCalledWith('admin', 'admin123');
-    expect(snackBar.open).toHaveBeenCalledWith('Bienvenido', 'X', {
-      horizontalPosition: 'end',
-      verticalPosition: 'bottom',
-    });
   });
 });

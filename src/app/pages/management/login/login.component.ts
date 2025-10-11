@@ -7,6 +7,7 @@ import { AuthUser } from '../../../core/models';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoadingDialogComponent } from '../../../components/loading-dialog/loading-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,9 @@ export class LoginComponent {
   constructor (private formBuilder: FormBuilder,
     private logger: LoggingService,
     private AuthService: AuthService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) { }
 
   openLoadingDialog(): void {
@@ -60,7 +63,7 @@ export class LoginComponent {
     this.AuthService.login(username || '', password || '')
       .subscribe(
         {
-          next: (response: AuthUser): void => {
+          next: (response: AuthUser | null): void => {
             this.logger.logInfo('Login exitoso', response);
           },
           error: (error: HttpErrorResponse): void => {
@@ -71,6 +74,7 @@ export class LoginComponent {
             this.isLoading$.next(false);
             this.openSnackBar('Bienvenido');
             this.closeLoadingDialog();
+            this.router.navigate(['../reservations'], { relativeTo: this.activeRoute });
           }
         });
   }
