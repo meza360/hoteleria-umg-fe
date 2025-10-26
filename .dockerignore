@@ -1,0 +1,33 @@
+# Node modules folder
+node_modules
+
+# Angular build output
+dist
+out-tsc
+
+# Temporary files and folders
+tmp
+temp
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+*.env
+*.local
+
+# IDE specific files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+**/.sonarlint
+**/.vscode
+**/.github
+**/.angular

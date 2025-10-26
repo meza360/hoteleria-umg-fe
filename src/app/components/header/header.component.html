@@ -1,11 +1,12 @@
 <header class="header">
-  <div class="container">
-    <h1 class="logo">Hotel UMG</h1>
-    <nav class="nav">
-      <a routerLink="/customer/home">Inicio</a>
-      <a routerLink="/customer/information/rooms">Habitaciones</a>
-      <a routerLink="/customer/information/our-services">Servicios</a>
-      <a routerLink="/management/login">Login</a>
+  <div class="container row space-between align-center">
+    <h1 class="logo full-width">Hotel UMG</h1>
+    <nav class="row full-width space-between gap-20">
+      <button mat-button routerLink="/customer/home">Inicio</button>
+      <button mat-button routerLink="/customer/information/rooms">Habitaciones</button>
+      <button mat-button (click)="onSearchReservations()">Reservaciones</button>
+      <!-- <a routerLink="/customer/information/our-services">Servicios</a> -->
+      <button mat-button routerLink="/management/login">Administracion</button>
     </nav>
   </div>
 </header>

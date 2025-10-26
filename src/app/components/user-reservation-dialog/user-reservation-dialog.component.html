@@ -1,0 +1,52 @@
+<div class="container-md text-center">
+  <div class="col align-center full-width text-center py-3 px-3 my-2">
+    <form [formGroup]="clientForm" class="full-width mx-3 px-3 login-form">
+      <section class="col full-width text-center">
+        <mat-form-field appearance="fill" class="form-control">
+          <mat-label class="form-label">Nombre Completo</mat-label>
+          <input matInput formControlName="name" class="form-control" placeholder="Ingresa tu nombre completo">
+          <mat-error *ngIf="clientForm.get('fullName')?.touched && clientForm.get('fullName')?.errors?.['required']">
+            El nombre completo es requerido.
+          </mat-error>
+        </mat-form-field>
+      </section>
+      <section class="col full-width text-center">
+        <mat-form-field appearance="fill" class="form-control">
+          <mat-label class="form-label">Correo Electrónico</mat-label>
+          <input matInput formControlName="email" class="form-control" placeholder="Ingresa tu correo electrónico">
+          <mat-error *ngIf="clientForm.get('email')?.touched && clientForm.get('email')?.errors?.['required']">
+            El correo electrónico es requerido.
+          </mat-error>
+          <mat-error *ngIf="clientForm.get('email')?.touched && clientForm.get('email')?.errors?.['email']">
+            Ingresa un correo electrónico válido.
+          </mat-error>
+        </mat-form-field>
+      </section>
+      <section class="col full-width text-center">
+        <mat-form-field class="form-control">
+          <mat-label>Fechas de reservacion</mat-label>
+          <mat-date-range-input [rangePicker]="picker" class="" [formGroup]="clientForm.controls.dateRange">
+            <input matInput matStartDate placeholder="Fecha inicio" [min]="minDate" [max]="maxDate"
+                   formControlName="start" (dateChange)="handleFindAvailableDates($event)"
+                   (input)="handleFindAvailableDates($event)" (keyup)="handleFindAvailableDates($event)" class="">
+            <input matInput matEndDate placeholder="Fecha fin" [min]="minDate" [max]="maxDate" formControlName="end"
+                   (dateChange)="handleFindAvailableDates($event)" (input)="handleFindAvailableDates($event)"
+                   (keyup)="handleFindAvailableDates($event)" class="">
+          </mat-date-range-input>
+          <mat-hint class="text-white">YYYY/MM/DD - YYYY/MM/DD</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </section>
+      <section class="col text-center">
+        <mat-dialog-actions class="mt-4">
+          <button mat-flat-button [disabled]="clientForm.invalid" [mat-dialog-close]="null" color="primary"
+                  (click)="reserveRoom()" class="full-width">
+            Reservar
+          </button>
+        </mat-dialog-actions>
+
+      </section>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-umg-frontend-service
+  namespace: gt2-software-apps
+spec:
+  selector:
+    app: hotel-umg-frontend
+  ports:
+    - port: 6005
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP

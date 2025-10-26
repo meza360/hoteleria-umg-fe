@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hotel-umg-frontend-ingress
+  namespace: gt2-software-apps
+  annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    #nginx.ingress.kubernetes.io/app-root: "/azure-file-service"
+    #nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    #nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    #nginx.ingress.kubernetes.io/enable-cors: "false"
+    #nginx.org/proxy-connect-timeout: "5s"
+    nginx.org/proxy-read-timeout: "5s"
+    #nginx.org/rewrites: "serviceName=api-service rewrite=/;"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: hotel.apps.gt2software.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hotel-umg-frontend-service
+                port:
+                  number: 6005
+  tls:
+    - secretName: gt2-software-apps-tls
+      hosts:
+        - "*.apps.gt2software.dev"

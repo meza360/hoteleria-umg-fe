@@ -10,8 +10,7 @@ export interface Reservation {
   'extras': Array<RoomExtras>;
   'billTo': {
     'name': string;
-    'lastName': string;
-    'taxId': string | 'C-F';
+    'email': string;
   },
   'payment': {
     'paymentMethod': 'onPremise';

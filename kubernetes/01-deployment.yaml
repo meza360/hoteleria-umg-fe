@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotel-umg-frontend
+  labels:
+    app: hotel-umg-frontend
+spec:
+  #replicas: 1
+  selector:
+    matchLabels:
+      app: hotel-umg-frontend
+  template:
+    metadata:
+      labels:
+        app: hotel-umg-frontend
+    spec:
+      containers:
+        - name: hotel-umg-frontend
+          image: docker.io/meza360/hotel-umg-fe:1.0
+          # environment variables defined by user
+          env:
+            - name: LOG_ROOT_PATH
+              value: /mnt/volumes/vecommerce-api/log
+            - name: DEPLOYMENT_ARCH
+              value: K8S
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          # environment variables from other sources
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+            requests:
+              cpu: "150m"
+              memory: "128Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              httpHeaders:
+                - name: X-GT2-APP-CONSUMER
+                  value: localk8s
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            terminationGracePeriodSeconds: 60
+      restartPolicy: Always
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hotel-umg-frontend-hpa
+  namespace: gt2-software-apps
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hotel-umg-frontend
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 95
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 15 # waits 15 seconds before scaling down
+    scaleUp:
+      stabilizationWindowSeconds: 10 # waits 10 seconds before scaling up
+      policies:
+        - type: Pods
+          value: 2 # scale up by 2 pods every 60 seconds
+          periodSeconds: 60
+        - type: Percent
+          value: 100 # increases the number of pods by 100% every 60 seconds
+          periodSeconds: 60

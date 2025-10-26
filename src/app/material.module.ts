@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { DEFAULT_CURRENCY_CODE, NgModule } from "@angular/core";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +21,29 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule
+} from '@angular/material/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MatMomentDateModule,
+  MomentDateAdapter
+} from '@angular/material-moment-adapter';
+const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'YYYY/MM/DD',
+  },
+  display: {
+    dateInput: 'YYYY/MM/DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   imports: [
@@ -46,7 +68,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTooltipModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDatepickerModule
   ],
   exports: [
     MatSidenavModule,
@@ -70,9 +93,21 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTooltipModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDatepickerModule
   ], providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }]
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    {
+      provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT
+    },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'GTQ' }
+
+  ]
 })
 
 export class MaterialModule { }

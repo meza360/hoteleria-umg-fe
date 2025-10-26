@@ -1,5 +1,5 @@
 .col-card-holder-75 {
-  width: 75%;
+  width: 30em;
 }
 
 .col-card-holder-25 {
@@ -11,9 +11,11 @@
 }
 
 .card-holder {
-  height: 10em;
+  height: 20em;
 }
 
 .img-card {
   aspect-ratio: 16 / 9;
+  object-fit: cover;
+  height: 100%;
 }

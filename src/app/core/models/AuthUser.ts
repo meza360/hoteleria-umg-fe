@@ -4,3 +4,9 @@ export interface AuthUser {
   username: string;
   roles: string[];
 }
+export interface AuthClient {
+  id: string;
+  email: string;
+  name: string;
+  number: string;
+}

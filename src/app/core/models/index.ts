@@ -1,3 +1,3 @@
-export { AuthUser } from './AuthUser';
-export { ApiResponse } from './ApiResponse';
-export { Reservation, RoomExtras } from './Reservation';
+export type { AuthUser } from './AuthUser';
+export type { ApiResponse } from './ApiResponse';
+export type { Reservation, RoomExtras } from './Reservation';

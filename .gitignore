@@ -26,8 +26,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
@@ -57,7 +55,6 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
-**/.vscode
 
 # Miscellaneous
 /.angular/cache
@@ -71,6 +68,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-
+**/.vscode
 **/env.ts

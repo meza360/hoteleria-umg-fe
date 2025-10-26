@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -11,9 +9,7 @@ describe('AppComponent', () => {
         RouterModule.forRoot([])
       ],
       declarations: [
-        AppComponent,
-        HeaderComponent,
-        FooterComponent
+        AppComponent
       ],
     }).compileComponents();
   });
@@ -24,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'hoteleria-umg'`, () => {
+  it(`should have as title 'hotel-umg-frontend-v2'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('hoteleria-umg');
+    expect(app.title).toEqual('hotel-umg-frontend-v2');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hotel UMG');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, hotel-umg-frontend-v2');
   });
 });
